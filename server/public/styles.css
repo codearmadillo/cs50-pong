@@ -1,0 +1,64 @@
+.hidden {
+  display: none !important;
+}
+body, html {
+  font-family: 'Press Start 2P', cursive;
+  margin: 0; padding: 0;
+  background: rgb(25, 25, 26);
+}
+#title {
+  box-sizing: border-box;
+  margin: 128px 0 48px;
+  font-size: 32px;
+  text-align: center;
+  color: #fff;
+  box-sizing: border-box;
+  padding: 0 32px;
+}
+#subtitle {
+  color: #fff;
+  font-size: 16px;
+  line-height: 21px;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 0 32px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+#scores {
+  margin: 56px auto 0;
+  max-width: 860px;
+  width: 100%;
+  list-style: none;
+  overflow: hidden;
+  border-radius: 6px;
+  box-sizing: border-box;
+  padding: 0 16px;
+}
+#scores li {
+  display: flex;
+  flex-flow: row nowrap;
+  height: 32px;
+  background: #fff;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 16px;
+}
+#scores li:nth-child(odd) {
+  background: #f3f3f3;
+}
+#scores li .name {
+  flex: 1 1 auto;
+}
+#scores li .score {
+  flex: 0 0 auto;
+  box-sizing: border-box;
+}
+.no-scores {
+  width: 100%;
+  display: block;
+  margin-top: 56px;
+  font-size: 13px;
+  text-align: center;
+  color: #fff;
+}

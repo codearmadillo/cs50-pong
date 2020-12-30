@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Pong! highscores</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1 id="title">Pong! highscores!</h1>
+    <h3 id="subtitle">This is a supporting page for CS50's final project by Jiří Královec - Pong! On this page, you can see your highscore and comprae them with others!</h3>
+    <!-- No scores available -->
+    <span id="no-scores" class="no-scores hidden">
+      No scores available
+    </span>
+    <!-- Table -->
+    <ul id="scores" class="hidden"></ul>
+    <script>
+      function render_results(items) {
+        document.getElementById('no-scores').classList.add('hidden');
+        const list = document.getElementById('scores');
+        items.forEach((item) => {
+          const node = document.createElement('li');
+          /** Name */
+          const name = document.createElement('span');
+          name.classList.add('name');
+          name.innerText = item.name;
+          /** Score */
+          const score = document.createElement('span');
+          score.classList.add('score');
+          score.innerText = item.score;
+          /** Append */
+          node.append(name, score);
+          list.append(node);
+        });
+        list.classList.remove('hidden');
+      }
+      function render_placeholder() {
+        document.getElementById('no-scores').classList.remove('hidden');
+        document.getElementById('scores').classList.add('hidden');
+      }
+      window.onload = () => {
+        const http = new XMLHttpRequest();
+        const url = '/api/list';
+        http.open('GET', url);
+        http.send();
+        http.onreadystatechange = function(e) {
+          if (this.readyState == 4 && this.status == 200) {
+            try {
+              const data = JSON.parse(http.responseText);
+              if(data.data.length > 0) {
+                render_results(data.data);
+              } else {
+                render_placeholder();
+              }
+            } catch(e) {
+              console.error(e);
+              render_placeholder();
+            }
+          } else {
+            render_placeholder();
+          }
+        }
+      };
+      /**
+       * <li>
+        <span class="name">Jiří</span>
+        <span class="score">2000</span>
+      </li>
+      */
+    </script>
+  </body>
+</html>
